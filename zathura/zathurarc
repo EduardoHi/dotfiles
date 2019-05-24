@@ -1,0 +1,4 @@
+
+
+#set selection to the clipboard for Ctrl+V
+set selection-clipboard clipboard
