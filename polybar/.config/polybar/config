@@ -1,0 +1,209 @@
+[colors]
+background = #111
+foreground = #fff
+foreground-alt = #c555
+; Green
+primary = #3ee57e
+; Orange
+secondary = #fe9e5b
+alert = #f00
+
+[bar/bottom]
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+width = 100%
+height = 28
+
+padding = 2
+
+module-margin = 2
+
+modules-left = xkeyboard backlight volume
+modules-center = i3
+modules-right = wlan eth battery temperature memory cpu filesystem date
+
+bottom = true
+
+line-size = 3
+lien-color = #f00
+padding-right = 2
+
+[module/xkeyboard]
+type = internal/xkeyboard
+blacklist-0 = num lock
+
+label-layout = %layout%
+label-layout-foreground = ${colors.secondary}
+label-layout-padding-right = 1
+label-indicator-padding = 2
+label-indicator-background = ${colors.secondary}
+
+[module/filesystem]
+type = internal/fs
+interval = 25
+spacing = 3
+
+mount-0 = /
+
+label-mounted = %{F#fe9e5b}%mountpoint%%{F-} %free%
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background}
+label-focused-underline = ${colors.primary}
+label-focused-padding = 2
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 2
+
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
+
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.secondary}
+label-urgent-padding = 2
+
+[module/backlight]
+type = internal/backlight
+card = intel_backlight
+format = <label>
+label = BRIGHTNESS %percentage%%
+label-padding = 2
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+label = CPU %percentage%%
+format-prefix-foreground = ${colors.secondary}
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix-foreground = ${colors.secondary}
+format-underline = #4bffdc
+label = MEM %percentage_used%%
+
+[module/wlan]
+type = internal/network
+interface = wlp2s0
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-underline = ${colors.primary}
+format-connected-padding = 2
+label-connected = %essid%: %local_ip% @ %signal%%
+label-disconnected = not connected
+format-disconnected-foreground = ${colors.secondary}
+
+[module/eth]
+type = internal/network
+interface = enp3s0
+interval = 3.0
+
+format-connected = <label-connected>
+format-connected-underline = ${colors.secondary}
+format-connected-padding = 2
+label-connected = %ifname%: %local_ip% @ %linkspeed%
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = "%Y-%m-%d"
+
+time = %H:%M:%S
+
+label = %date% %time%
+
+[module/volume]
+type = internal/alsa
+
+format-volume = <ramp-volume> <label-volume>
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+label-volume = VOL %percentage%%
+label-volume-foreground = ${colors.foreground}
+format-volume-underline = ${colors.primary}
+format-volume-padding = 2
+
+format-muted-foreground = ${colors.primary}
+format-muted-padding = 2
+label-muted =   muted
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC
+full-at = 100
+
+format-charging = <animation-charging> <label-charging>
+label-charging = BAT %percentage%% 
+
+format-discharging = <ramp-capacity> <label-discharging>
+label-discharging = BAT %percentage%% 
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.primary}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-3 = 
+ramp-capacity-4 = 
+ramp-capacity-5 = 
+ramp-capacity-foreground = ${colors.secondary}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-3 = 
+animation-charging-4 = 
+animation-charging-foreground = ${colors.primary}
+animation-charging-framerate = 750
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+hwmon-path = /sys/devices/virtual/hwmon/hwmon2/temp1_input
+
+format = <ramp> <label>
+format-warn = <ramp> <label-warn>
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.alert}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.secondary}
+
+[settings]
+screenchange-reload = true
+
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+
+; vim:ft=dosini

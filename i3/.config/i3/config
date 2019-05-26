@@ -241,21 +241,21 @@ hide_edge_borders both
 
 # Start i3 to display a workspace  (plus the system information i3status
 # finds out, if available)
-bar {
+#bar {
 	#status_command i3status
-	status_command i3blocks
+	#status_command i3blocks
 #	i3_command i3bar
-        height 22
-        separator_symbol " "
-        colors {
-        	background #010607bb
-    		separator #000000
+        #height 22
+        #separator_symbol " "
+        #colors {
+        #	background #010607bb
+    	#	separator #000000
         	# mode              border              background              text
-  		    focused_workspace   #0a1517             #0a1517                 #4f7e7f
-		    inactive_workspace  #0a1517             #0a1517                 #0c3a3c
-	        urgent_workspace    $urgent-bg-color    $urgent-bg-color        $bg-color
- 		}
-}
+  	#	    focused_workspace   #0a1517             #0a1517                 #4f7e7f
+		    #inactive_workspace  #0a1517             #0a1517                 #0c3a3c
+	        #urgent_workspace    $urgent-bg-color    $urgent-bg-color        $bg-color
+ 		#}
+#}
 
 #____________________________________________________________________________________________
 
@@ -379,6 +379,9 @@ exec_always --no-startup-id compton -f --config ~/.compton.conf
 
 #set different key bindings
 exec_always --no-startup-id xmodmap ~/.xmodmap
+
+#start Polybar
+exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 #make nautilus floating by default
 for_window [class="Nautilus"] floating enable
