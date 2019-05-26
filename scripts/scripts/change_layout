@@ -1,0 +1,20 @@
+#!/bin/bash
+
+setxk() {
+    setxkbmap -model pc105 -layout $1
+    xmodmap ~/.xmodmap
+}
+
+case "$1" in
+    us)
+        setxk $1
+        ;;
+    latam)
+        setxk $1
+        ;;
+    *)
+        echo "Usage: $0 {us|latam}"
+        exit 2
+esac
+
+exit 0

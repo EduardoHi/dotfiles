@@ -1,0 +1,10 @@
+#!/bin/bash
+
+FOLDER=~/Pictures/WallPapers/
+
+RANDOM_FILE=$(ls $FOLDER | sort -R | tail -1)
+
+echo $RANDOM_FILE
+
+feh --bg-max $FOLDER$RANDOM_FILE
+wal -i $FOLDER$RANDOM_FILE -n

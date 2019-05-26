@@ -1,0 +1,5 @@
+
+$ONE = "reto de Aaron"
+$TWO = "este es el reto"
+
+echo $ONE $TWO

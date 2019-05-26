@@ -1,0 +1,34 @@
+#!/bin/sh
+
+#this options were generated with arandr
+
+# dual setup
+dual_setup() {
+    xrandr --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output eDP1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output VIRTUAL1 --off
+}
+
+# normal setup
+normal_setup() {
+    xrandr --output HDMI1 --off --output DP1 --off --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
+}
+
+# mirror setup
+mirror_setup() {
+    xrandr --output HDMI1 --mode 1920x1080 --pos 0x0 --rotate normal --output DP1 --off --output eDP1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output VIRTUAL1 --off
+}
+
+
+case "$1" in
+    normal)
+        normal_setup
+        ;;
+    dual)
+        dual_setup
+        ;;
+    mirror)
+	mirror_setup
+	;;
+    *)
+        echo "Usage: $0 {normal|mirror|dual}"
+        exit 2
+esac

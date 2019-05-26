@@ -1,0 +1,12 @@
+declare -a ARRAY
+
+let count=0
+
+while read LINE; do
+    ARRAY[$count]=$LINE
+    ((count++))
+done
+
+echo ${#ARRAY[@]}
+
+echo ${ARRAY[4]}

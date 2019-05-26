@@ -1,0 +1,16 @@
+IMAGE=/tmp/i3lock.png
+
+#SCREENSHOT="import -window root $IMAGE"
+SCREENSHOT="import -window root $IMAGE"
+
+BLURTYPE="0x8"
+
+$SCREENSHOT
+
+#convert $IMAGE -colorspace gray -canny 0x1+10%+30% $IMAGE
+convert $IMAGE -resize 50% $IMAGE
+#convert $IMAGE -fill blue -tint 90 $IMAGE
+convert $IMAGE -blur $BLURTYPE $IMAGE
+convert $IMAGE -resize 200% $IMAGE
+i3lock -i $IMAGE
+rm $IMAGE
