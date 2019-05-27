@@ -139,18 +139,20 @@ label = %date% %time%
 type = internal/alsa
 
 format-volume = <ramp-volume> <label-volume>
+label-volume = %percentage%%
 
-ramp-volume-0 = 
-ramp-volume-1 = 
-ramp-volume-2 = 
-label-volume = VOL %percentage%%
-label-volume-foreground = ${colors.foreground}
-format-volume-underline = ${colors.primary}
-format-volume-padding = 2
-
+format-muted-prefix = " "
+label-muted = MUTE
 format-muted-foreground = ${colors.primary}
-format-muted-padding = 2
-label-muted =   muted
+
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
+ramp-volume-3 = 
+ramp-volume-4 = 
+ramp-volume-5 = 
+ramp-volume-6 = 
+
 
 [module/battery]
 type = internal/battery
@@ -189,26 +191,16 @@ type = internal/temperature
 thermal-zone = 0
 warn-temperature = 60
 
-hwmon-path = /sys/devices/virtual/hwmon/hwmon2/temp1_input
+hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
 
-format = <ramp> <label>
-format-warn = <ramp> <label-warn>
+format = <label>
+format-warn = <label-warn>
 
 label = %temperature-c%
 label-warn = %temperature-c%
 label-warn-foreground = ${colors.alert}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
-ramp-foreground = ${colors.secondary}
-
 [settings]
 screenchange-reload = true
-
-[global/wm]
-margin-top = 5
-margin-bottom = 5
-
 
 ; vim:ft=dosini
