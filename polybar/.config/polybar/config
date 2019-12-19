@@ -1,50 +1,73 @@
 [colors]
-background = #111
+
+transparent-background = #000f0f0f
+
+background = #000
 foreground = #fff
 foreground-alt = #c555
+
 ; Green
 primary = #3ee57e
 ; Orange
 secondary = #fe9e5b
 alert = #f00
 
+[shared]
+; attributes shared among both bars
+mono-font = DejaVu Sans Mono:style=Book:size=11;3
+icon-font = Material Icons:style=Regular;3
+
+[bar/top]
+; set it up to each monitor
+monitor = ${env:MONITOR:}
+background = ${colors.transparent-background}
+foreground = ${colors.foreground}
+
+modules-center = i3
+modules-right = date
+
+font-0 = ${shared.mono-font}
+font-1 = Material Icons:style=Regular
+
+border-bottom-size  = 4
+border-top-size     = 4
+
+border-left-size  = 4
+border-right-size = 4
+
 [bar/bottom]
+bottom = true
+
 ; set it up to each monitor
 monitor = ${env:MONITOR:}
 
-background = ${colors.background}
+background = ${colors.transparent-background}
 foreground = ${colors.foreground}
 
-width = 100%
-height = 28
+border-bottom-size  = 4
+border-top-size     = 4
 
-padding = 2
+border-left-size  = 4
+border-right-size = 4
 
 module-margin = 2
 
 modules-left = xkeyboard backlight volume
-modules-center = i3
-modules-right = wlan eth battery temperature memory cpu filesystem date
+modules-right = wlan eth battery memory cpu filesystem
 
+font-0 = ${shared.mono-font}
+font-1 = ${shared.icon-font}
 
-font-0 = DejaVu Sans Mono:style=Book
-font-1 = Material Icons:style=Regular
-
-bottom = true
-
-line-size = 3
-lien-color = #f00
-padding-right = 2
 
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
 
 label-layout = %layout%
+label-layout-background = ${colors.background}
 label-layout-foreground = ${colors.secondary}
-label-layout-padding-right = 1
-label-indicator-padding = 2
 label-indicator-background = ${colors.secondary}
+label-layout-padding = 1
 
 [module/filesystem]
 type = internal/fs
@@ -54,32 +77,36 @@ spacing = 3
 mount-0 = /
 
 label-mounted = %{F#fe9e5b}%mountpoint%%{F-} %free%
+label-mounted-background = ${colors.background}
+label-mounted-padding = 1
+
 
 [module/i3]
+
 pin-workspaces = true
 type = internal/i3
-format = <label-state> <label-mode>
+format = <label-mode> <label-state>
 index-sort = true
 wrapping-scroll = false
 
-label-mode-padding = 2
-label-mode-foreground = #000
-label-mode-background = ${colors.primary}
+label-mode-background = ${colors.background}
 
 ; focused = Active workspace on focused monitor
 label-focused = %index%
-label-focused-background = ${colors.background}
-label-focused-underline = ${colors.primary}
+label-focused-background = ${colors.primary}
+label-focused-foreground = #000
 label-focused-padding = 2
 
 ; unfocused = Inactive workspace on any monitor
 label-unfocused = %index%
+label-unfocused-background = ${colors.background}
 label-unfocused-padding = 2
 
 ; visible = Active workspace on unfocused monitor
 label-visible = %index%
+; set to equal the config in label-focused
 label-visible-background = ${self.label-focused-background}
-label-visible-underline = ${self.label-focused-underline}
+label-visible-foreground = ${self.label-focused-foreground}
 label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
@@ -91,8 +118,9 @@ label-urgent-padding = 2
 type = internal/backlight
 card = intel_backlight
 format = <ramp> <label>
-label = BRIGHTNESS %percentage%%
-label-padding = 2
+label = LIGHT %percentage%%
+label-padding = 1
+label-background = ${colors.background}
 
 ramp-0 = 
 
@@ -102,25 +130,33 @@ type = internal/cpu
 interval = 2
 label = CPU %percentage%%
 format-prefix-foreground = ${colors.secondary}
+format-background = ${colors.background}
+format-padding = 1
 
 [module/memory]
 type = internal/memory
 interval = 2
 format-prefix-foreground = ${colors.secondary}
 format-underline = #4bffdc
-label = %percentage_used%%
+label = RAM %percentage_used%%
 format-prefix = 
+format-background = ${colors.background}
+format-padding = 1
 
 [module/wlan]
 type = internal/network
 interface = wlp2s0
 interval = 3.0
 
+; label-connected-background = ${color.background}
+
 format-connected = <label-connected>
-format-connected-underline = ${colors.primary}
-format-connected-padding = 2
+format-connected-padding = 1
+format-connected-background = ${colors.background}
+
 label-connected = %essid%: %local_ip% @ %signal%%
 label-disconnected = not connected
+
 format-disconnected-foreground = ${colors.secondary}
 
 [module/eth]
@@ -130,7 +166,9 @@ interval = 3.0
 
 format-connected = <label-connected>
 format-connected-underline = ${colors.secondary}
-format-connected-padding = 2
+format-connected-padding = 1
+format-connected-background = ${colors.background}
+
 label-connected = %ifname%: %local_ip% @ %linkspeed%
 
 [module/date]
@@ -142,15 +180,19 @@ date = "%Y-%m-%d"
 time = %H:%M:%S
 
 label = %date% %time%
+format-background= ${colors.background}
+format-padding = 1
 
 [module/volume]
 type = internal/alsa
 
+format-volume-padding = 1
+format-volume-background = ${colors.background}
 format-volume = <ramp-volume> <label-volume>
 label-volume = %percentage%%
 
 format-muted-prefix = " "
-label-muted = MUTE
+label-muted = " "
 format-muted-foreground = ${colors.primary}
 
 ramp-volume-0 = 
@@ -169,10 +211,17 @@ time-format = %H:%M
 battery = BAT0
 adapter = AC
 format-charging = <animation-charging> <label-charging>
-label-charging = %percentage%% (%time%)
+
+format-charging-background = ${colors.background}
+format-charging-padding = 1
+
+label-charging = %percentage%%
 format-discharging = <ramp-capacity> <label-discharging>
 label-discharging = %percentage%%
+
 format-full = <label-full>
+format-full-background = ${colors.background}
+format-full-padding = 1
 
 format-full-prefix = " "
 ramp-capacity-0 = 
@@ -187,26 +236,12 @@ ramp-capacity-foreground   = ${colors.foreground}
 bar-capacity-width = 10
 
 animation-charging-0 = ""
-animation-charging-1 = ""
-animation-charging-2 = ""
-animation-charging-3 = ""
-animation-charging-4 = ""
+; animation-charging-1 = ""
+; animation-charging-2 = ""
+; animation-charging-3 = ""
+; animation-charging-4 = ""
 
-animation-charging-framerate = 750
-
-[module/temperature]
-type = internal/temperature
-thermal-zone = 0
-warn-temperature = 60
-
-hwmon-path = /sys/devices/platform/coretemp.0/hwmon/hwmon2/temp1_input
-
-format = <label>
-format-warn = <label-warn>
-
-label = %temperature-c%
-label-warn = %temperature-c%
-label-warn-foreground = ${colors.alert}
+; animation-charging-framerate = 750
 
 [settings]
 screenchange-reload = true

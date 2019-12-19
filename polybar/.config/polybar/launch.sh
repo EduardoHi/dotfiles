@@ -12,4 +12,5 @@ while pgrep -u $UID -x polybar > /dev/null; do sleep 1; done
 # "bottom is the name of the bar in the config
 for m in $(polybar --list-monitors | cut -d":" -f1); do
     MONITOR=$m polybar --reload bottom &
+    MONITOR=$m polybar --reload top &
 done
