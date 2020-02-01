@@ -1,4 +1,3 @@
-find font
 find Has
 show hidden
 shell lsa
@@ -8,7 +7,6 @@ find Scr
 find .emacs.
 find .emacs.dq
 open_with s
-find Pi
 find Exp
 mkdir lispgames
 find q
@@ -48,3 +46,5 @@ find ran
 find Readiqh
 find Read
 find 
+display_help 
+find Pi
