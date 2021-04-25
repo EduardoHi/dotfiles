@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# from FOLDER, pic a random file,
+# set it as background, and run pywal to get a 
+# color scheme from that file
+
 FOLDER=~/Pictures/WallPapers/
 
 RANDOM_FILE=$(ls $FOLDER | sort -R | tail -1)

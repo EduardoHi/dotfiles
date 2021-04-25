@@ -2,14 +2,16 @@
 
 transparent-background = #000f0f0f
 
-background = #000
-foreground = #fff
-foreground-alt = #c555
+background = ${xrdb:color0:#000}
+foreground = ${xrdb:color7:#fff}
+foreground-alt = ${xrdb:color7:#eee}
 
-; Green
-primary = #3ee57e
-; Orange
-secondary = #fe9e5b
+; from xresources or Green
+primary = ${xrdb:color1:#3ee573}
+
+; from xresourcer or Orange
+secondary = ${xrdb:color2:#fe935b}
+
 alert = #f00
 
 [shared]

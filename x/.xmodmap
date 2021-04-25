@@ -1,7 +1,8 @@
 
 
 ! Map Escape to Caps Lock
-clear Lock
+remove Lock = Caps_Lock
+keysym Caps_Lock = Escape
 keycode 66 = Escape
 
 !Alt Gr is ISO_Level3_Shift
